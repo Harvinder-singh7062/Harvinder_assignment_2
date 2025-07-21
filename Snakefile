@@ -25,3 +25,8 @@ rule run_fastqc:
         f"results/qc/{SRA}_fastqc.html"
     shell:
         "fastqc -o results/qc {input}"
+rule upload_to_s3:
+    input:
+        "results/output_file.txt"  # change to your final output file
+    shell:
+        "aws s3 cp {input} s3://harvinderassignment2/"
